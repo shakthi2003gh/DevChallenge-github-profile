@@ -1,0 +1,29 @@
+@forward "utilities";
+
+*,
+*::after,
+*::before {
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Be Vietnam Pro", sans-serif;
+  font-size: var(--fs-body);
+  color: var(--clr-text-400);
+  background: var(--bg);
+}
+
+.fs-large {
+  font-size: var(--fs-large);
+  color: var(--clr-text-700);
+}
+
+.fs-title {
+  font-size: var(--fs-title);
+  color: var(--clr-text-700);
+}
+
+.fs-small {
+  font-size: var(--fs-small);
+}
