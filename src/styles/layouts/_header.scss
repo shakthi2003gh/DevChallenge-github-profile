@@ -1,0 +1,12 @@
+header {
+  padding: 2rem 3rem;
+  height: clamp(220px, 40vh, 410px);
+  background: url("/hero-image-github-profile.png") no-repeat;
+  background-size: cover;
+  background-position: 75%;
+
+  .search-bar {
+    max-width: 500px;
+    margin-inline: auto;
+  }
+}

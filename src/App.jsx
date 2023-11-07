@@ -1,5 +1,11 @@
+import Header from "./layouts/header";
+
 function App() {
-  return <>Hello world</>;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
 export default App;
