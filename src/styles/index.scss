@@ -29,3 +29,121 @@ body {
 .fs-small {
   font-size: var(--fs-small);
 }
+
+.placeholder-alert {
+  font-size: var(--fs-body);
+  color: var(--clr-text-200);
+}
+
+main {
+  max-width: 900px;
+  padding-inline: 2.5rem;
+  margin-inline: auto;
+  margin-bottom: 2rem;
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transform: translateY(-15%);
+
+    @media (width>=800px) {
+      flex-direction: row;
+      gap: 2rem;
+    }
+  }
+
+  .profile-image {
+    width: 120px;
+    height: 120px;
+    padding: 0.5rem;
+    border-radius: 15px;
+    background-color: var(--bg);
+
+    img {
+      width: 105px;
+      aspect-ratio: 1;
+      border-radius: 15px;
+    }
+
+    @media (width>=800px) {
+      transform: translateY(-20%);
+    }
+  }
+
+  .profile-social-stats {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 1rem;
+
+    > div {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.75em;
+      font-weight: bold;
+      text-transform: capitalize;
+      width: fit-content;
+      padding: 0.5rem;
+      color: var(--clr-text-200);
+      background-color: var(--clr-primary);
+      border-radius: 10px;
+
+      span {
+        padding: 0.5rem;
+
+        &:last-child {
+          color: var(--clr-text-400);
+        }
+      }
+
+      .line {
+        width: 1px;
+        height: 30px;
+        padding: 0;
+        opacity: 0.5;
+        background-color: var(--clr-text-200);
+      }
+    }
+
+    @media (width>=800px) {
+      display: flex;
+      align-items: center;
+    }
+  }
+
+  .profile-details {
+    .username {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+
+    @media (width >=800px) {
+      p {
+        width: 70%;
+      }
+    }
+  }
+
+  .repositories {
+    margin-block: 2.5rem;
+  }
+
+  a.view-all {
+    display: block;
+    font-size: 0.8em;
+    text-decoration: none;
+    width: fit-content;
+    padding-block: 0.5rem;
+    margin-inline: auto;
+    color: var(--clr-text-400);
+
+    &:hover {
+      color: var(--clr-text-700);
+    }
+  }
+}
