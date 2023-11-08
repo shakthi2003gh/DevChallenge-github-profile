@@ -1,4 +1,5 @@
 import { octokit } from "./octokit";
+import GitHub from "../assets/github-mark-white.svg";
 
 const placeholderUserData = {
   id: "github",
@@ -96,6 +97,31 @@ export function getUserRepositories(userid) {
       })
       .catch(() => {
         resolve(placeholderReposData);
+      });
+  });
+}
+
+export function searchUser(searchQuery) {
+  const { id, image, description } = placeholderUserData;
+
+  return new Promise((resolve) => {
+    if (!searchQuery?.trim()) return resolve([{ id, image, description }]);
+
+    octokit
+      .request(`GET /search/users`, { q: searchQuery, per_page: 4 })
+      .then(({ data }) => {
+        const userList = data.items.map(({ login: userid }) => {
+          return getUserProfile(userid).then((user) => ({
+            id: user.id,
+            image: user.image || GitHub,
+            description: user.description,
+          }));
+        });
+
+        Promise.all(userList).then(resolve);
+      })
+      .catch(() => {
+        resolve([{ id, image, description }]);
       });
   });
 }
