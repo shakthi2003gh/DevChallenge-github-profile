@@ -1,0 +1,41 @@
+.repository-card {
+  display: grid;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-radius: 10px;
+  background: var(--clr-primary);
+  background: linear-gradient(
+    to right,
+    var(--clr-primary),
+    var(--clr-secondary)
+  );
+
+  .description {
+    line-height: 2.4ch;
+
+    @media (width>= 800px) {
+      width: 80%;
+    }
+  }
+
+  .details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-top: 0.5rem;
+
+    span {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+
+      img {
+        width: 20px;
+      }
+    }
+
+    .updatedAt {
+      font-size: 0.8em;
+    }
+  }
+}
