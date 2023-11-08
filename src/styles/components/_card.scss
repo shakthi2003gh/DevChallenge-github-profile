@@ -9,6 +9,11 @@
     var(--clr-primary),
     var(--clr-secondary)
   );
+  transition: scale 150ms ease-in;
+
+  &:hover {
+    scale: 1.06;
+  }
 
   .description {
     line-height: 2.4ch;
