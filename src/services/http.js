@@ -12,6 +12,45 @@ const placeholderUserData = {
   type: "Organization",
 };
 
+const placeholderReposData = [
+  {
+    id: 170876990,
+    title: ".github",
+    description: "Community health files for the @GitHub organization",
+    forksCount: 2518,
+    starCount: 733,
+    updatedAt: "2023-11-08T05:55:06Z",
+  },
+  {
+    id: 632088451,
+    title: "accessibility-alt-text-bot",
+    description:
+      "An action to remind users to add alt text on Issues, Pull Requests, and Discussions",
+    license: "MIT",
+    forksCount: 10,
+    starCount: 53,
+    updatedAt: "2023-10-22T21:11:17Z",
+  },
+  {
+    id: 95114338,
+    title: "accessibilityjs",
+    description: "Client side accessibility error scanner.",
+    license: "MIT",
+    forksCount: 72,
+    starCount: 2180,
+    updatedAt: "2023-10-29T09:23:54Z",
+  },
+  {
+    id: 221181294,
+    title: "actions-cheat-sheet",
+    description: "A cheat sheet for GitHub Actions",
+    license: "MIT",
+    forksCount: 38,
+    starCount: 195,
+    updatedAt: "2023-10-06T14:08:26Z",
+  },
+];
+
 export function getUserProfile(userid = "") {
   return new Promise((resolve) => {
     if (!userid?.trim()) return resolve(placeholderUserData);
@@ -32,6 +71,31 @@ export function getUserProfile(userid = "") {
       })
       .catch(() => {
         resolve(placeholderUserData);
+      });
+  });
+}
+
+export function getUserRepositories(userid) {
+  return new Promise((resolve) => {
+    if (!userid?.trim()) return resolve(placeholderReposData);
+
+    octokit
+      .request(`GET /users/${userid}/repos`, { per_page: 4 })
+      .then(({ data }) => {
+        resolve(
+          data.map((repo) => ({
+            id: repo.id,
+            title: repo.name,
+            description: repo.description,
+            license: repo.license?.spdx_id,
+            forksCount: repo.forks_count,
+            starCount: repo.stargazers_count,
+            updatedAt: repo.updated_at,
+          }))
+        );
+      })
+      .catch(() => {
+        resolve(placeholderReposData);
       });
   });
 }
