@@ -1,4 +1,4 @@
-import { octokit } from "./octokit";
+import provider from "./providerConfig";
 import GitHub from "../assets/github-mark-white.svg";
 
 const placeholderUserData = {
@@ -56,8 +56,7 @@ export function getUserProfile(userid = "") {
   return new Promise((resolve) => {
     if (!userid?.trim()) return resolve(placeholderUserData);
 
-    octokit
-      .request(`GET /users/${userid}`)
+    provider(`/users/${userid}`)
       .then(({ data }) => {
         resolve({
           id: data.login,
@@ -80,8 +79,7 @@ export function getUserRepositories(userid) {
   return new Promise((resolve) => {
     if (!userid?.trim()) return resolve(placeholderReposData);
 
-    octokit
-      .request(`GET /users/${userid}/repos`, { per_page: 4 })
+    provider(`/users/${userid}/repos?per_page=4`)
       .then(({ data }) => {
         resolve(
           data.map((repo) => ({
@@ -107,8 +105,7 @@ export function searchUser(searchQuery) {
   return new Promise((resolve) => {
     if (!searchQuery?.trim()) return resolve([{ id, image, description }]);
 
-    octokit
-      .request(`GET /search/users`, { q: searchQuery, per_page: 4 })
+    provider(`/search/users?q=${searchQuery}&per_page=4`)
       .then(({ data }) => {
         const userList = data.items.map(({ login: userid }) => {
           return getUserProfile(userid).then((user) => ({
